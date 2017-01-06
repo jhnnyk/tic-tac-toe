@@ -40,14 +40,24 @@ Board.prototype.playerMove = function() {
   // otherwise mark the box and switch player turns
   if (player1.classList.contains('active')) {
     this.classList.add('box-filled-1');
-    player1.classList.remove('active');
-    player2.classList.add('active');
+    board.switchToPlayer(player2);
   } else {
     this.classList.add('box-filled-2');
-    player2.classList.remove('active');
-    player1.classList.add('active');
+    board.switchToPlayer(player1);
   }
 };
+
+Board.prototype.switchToPlayer = function(player) {
+  if (player === player1) {
+    // switch to player1
+    player1.classList.add('active');
+    player2.classList.remove('active');
+  } else {
+    // switch to player2
+    player2.classList.add('active');
+    player1.classList.remove('active');
+  }
+}; 
 
 Board.prototype.resetBoard = function() {
   // make player one start the game
