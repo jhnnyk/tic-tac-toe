@@ -51,13 +51,17 @@ Board.prototype.switchToPlayer = function(player) {
   if (player === player1) {
     // switch to player1
     player1.classList.add('active');
+    boardScreen.classList.add('p1_active');
     player2.classList.remove('active');
+    boardScreen.classList.remove('p2_active');
   } else {
     // switch to player2
     player2.classList.add('active');
+    boardScreen.classList.add('p2_active');
     player1.classList.remove('active');
+    boardScreen.classList.remove('p1_active');
   }
-}; 
+};
 
 Board.prototype.resetBoard = function() {
   // make player one start the game
