@@ -78,7 +78,9 @@
   Board.prototype.resetBoard = function() {
     // make player one start the game
     player1.classList.add('active');
+    boardScreen.classList.add('p1_active');
     player2.classList.remove('active');
+    boardScreen.classList.remove('p2_active');
 
     // clear the board
     for (var i = 0; i < spots.length; i++) {
@@ -136,7 +138,7 @@
 
   Board.prototype.showFinishScreen = function(winner) {
     finishScreen.classList.add(winner);
-    
+
     if (winner == "screen-win-tie") {
       finishScreen.querySelector('.message').innerHTML = "It's a tie!";
     } else {
