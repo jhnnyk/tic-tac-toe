@@ -110,11 +110,13 @@
           p1count++;
           if (p1count == 3) {
             console.log("Player 1 Wins!");
+            board.showFinishScreen("screen-win-one");
           }
         } else if (player2_spots.includes(spot)) {
           p2count++;
           if (p2count == 3) {
             console.log("Player 2 Wins!");
+            board.showFinishScreen("screen-win-two");
           }
         }
 
@@ -122,6 +124,21 @@
     });
 
     console.log(`Player 1: ${player1_spots}, Player 2: ${player2_spots}.`)
+  };
+
+  Board.prototype.showFinishScreen = function(winner) {
+    finishScreen.classList.add(winner);
+
+    // Set up finish display
+    startScreen.style.display = "none";
+    boardScreen.style.display = "none";
+    finishScreen.style.display = "initial";
+
+    // Start button shows board
+    // startButton.addEventListener("click", function(){
+    //   startScreen.style.display = "none";
+    //   boardScreen.style.display = "initial";
+    // });
   };
 
   // set up a new board
