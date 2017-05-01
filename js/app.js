@@ -89,6 +89,11 @@
     }
     player1_spots = [];
     player2_spots = [];
+
+    // clear finish screen styles
+    finishScreen.classList.remove('screen-win-one');
+    finishScreen.classList.remove('screen-win-two');
+    finishScreen.classList.remove('screen-win-tie');
   };
 
   // track players moves
