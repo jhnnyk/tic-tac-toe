@@ -128,6 +128,7 @@
 
   Board.prototype.showFinishScreen = function(winner) {
     finishScreen.classList.add(winner);
+    finishScreen.querySelector('.message').innerHTML = "Winner!"
 
     // Set up finish display
     startScreen.style.display = "none";
@@ -135,10 +136,12 @@
     finishScreen.style.display = "initial";
 
     // Start button shows board
-    // startButton.addEventListener("click", function(){
-    //   startScreen.style.display = "none";
-    //   boardScreen.style.display = "initial";
-    // });
+    finishScreen.querySelector('.button').addEventListener("click", function(){
+      board.resetBoard();
+      finishScreen.style.display = "none";
+      startScreen.style.display = "none";
+      boardScreen.style.display = "initial";
+    });
   };
 
   // set up a new board
