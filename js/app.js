@@ -8,6 +8,11 @@
   var player2 = document.getElementById('player2');
 
   var spots = document.querySelectorAll('.box');
+  var player1_spots = [];
+  var player2_spots = [];
+  const WINNING_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+                                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                                [0, 4, 8], [2, 4, 6]]
 
   // Set up initial display
   startScreen.style.display = "initial";
@@ -46,6 +51,9 @@
       this.classList.add('box-filled-2');
       board.switchToPlayer(player1);
     }
+
+    // check for a win
+    board.checkForWin();
   };
 
   Board.prototype.switchToPlayer = function(player) {
@@ -74,6 +82,46 @@
       spots[i].classList.remove('box-filled-1');
       spots[i].classList.remove('box-filled-2');
     }
+    player1_spots = [];
+    player2_spots = [];
+  };
+
+  Board.prototype.checkForWin = function() {
+
+    for (var i = 0; i < spots.length; i++) {
+      if (spots[i].classList.contains('box-filled-1')) {
+        if (!player1_spots.includes(i)) {
+          player1_spots.push(i);
+        }
+      } else if (spots[i].classList.contains('box-filled-2')) {
+        if (!player2_spots.includes(i)) {
+          player2_spots.push(i);
+        }
+      }
+    }
+
+    WINNING_COMBINATIONS.forEach(function(combo) {
+      var p1count = 0;
+      var p2count = 0;
+
+      combo.forEach(function(spot) {
+
+        if (player1_spots.includes(spot)) {
+          p1count++;
+          if (p1count == 3) {
+            console.log("Player 1 Wins!");
+          }
+        } else if (player2_spots.includes(spot)) {
+          p2count++;
+          if (p2count == 3) {
+            console.log("Player 2 Wins!");
+          }
+        }
+
+      })
+    });
+
+    console.log(`Player 1: ${player1_spots}, Player 2: ${player2_spots}.`)
   };
 
   // set up a new board
