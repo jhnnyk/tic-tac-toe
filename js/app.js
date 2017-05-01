@@ -111,7 +111,6 @@
       var p2count = 0;
 
       combo.forEach(function(spot) {
-
         if (player1_spots.includes(spot)) {
           p1count++;
           if (p1count == 3) {
@@ -123,21 +122,26 @@
             board.showFinishScreen("screen-win-two");
           }
         }
-
       })
+
     });
   };
 
   // check for a tie
   Board.prototype.checkForTie = function() {
     if (player1_spots.length + player2_spots.length == 9) {
-      console.log("It's a tie!");
+      board.showFinishScreen("screen-win-tie");
     }
   };
 
   Board.prototype.showFinishScreen = function(winner) {
     finishScreen.classList.add(winner);
-    finishScreen.querySelector('.message').innerHTML = "Winner!"
+    
+    if (winner == "screen-win-tie") {
+      finishScreen.querySelector('.message').innerHTML = "It's a tie!";
+    } else {
+      finishScreen.querySelector('.message').innerHTML = "Winner!";
+    }
 
     // Set up finish display
     startScreen.style.display = "none";
