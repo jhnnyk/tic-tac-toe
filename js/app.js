@@ -52,10 +52,13 @@
       board.switchToPlayer(player1);
     }
 
-    // check for a win
+    // check game status
+    board.trackMoves();
     board.checkForWin();
+    board.checkForTie();
   };
 
+  // switch players
   Board.prototype.switchToPlayer = function(player) {
     if (player === player1) {
       // switch to player1
@@ -86,8 +89,8 @@
     player2_spots = [];
   };
 
-  Board.prototype.checkForWin = function() {
-
+  // track players moves
+  Board.prototype.trackMoves = function() {
     for (var i = 0; i < spots.length; i++) {
       if (spots[i].classList.contains('box-filled-1')) {
         if (!player1_spots.includes(i)) {
@@ -99,7 +102,10 @@
         }
       }
     }
+  };
 
+  // check if anyone has won
+  Board.prototype.checkForWin = function() {
     WINNING_COMBINATIONS.forEach(function(combo) {
       var p1count = 0;
       var p2count = 0;
@@ -109,21 +115,24 @@
         if (player1_spots.includes(spot)) {
           p1count++;
           if (p1count == 3) {
-            console.log("Player 1 Wins!");
             board.showFinishScreen("screen-win-one");
           }
         } else if (player2_spots.includes(spot)) {
           p2count++;
           if (p2count == 3) {
-            console.log("Player 2 Wins!");
             board.showFinishScreen("screen-win-two");
           }
         }
 
       })
     });
+  };
 
-    console.log(`Player 1: ${player1_spots}, Player 2: ${player2_spots}.`)
+  // check for a tie
+  Board.prototype.checkForTie = function() {
+    if (player1_spots.length + player2_spots.length == 9) {
+      console.log("It's a tie!");
+    }
   };
 
   Board.prototype.showFinishScreen = function(winner) {
